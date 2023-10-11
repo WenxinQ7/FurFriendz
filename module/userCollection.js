@@ -1,4 +1,4 @@
-const { MongoClient } = require("mongodb");
+import { MongoClient } from "mongodb";
 const url =
   "mongodb+srv://qiwenxin98:Zjjxwjp@cluster0.chnfjby.mongodb.net/?retryWrites=true&w=majority";
 const client = new MongoClient(url);
@@ -26,7 +26,7 @@ async function findUserByUsername(username) {
   return db.collection("users").findOne(username);
 }
 
-module.exports = {
+export default {
   createUser,
   findUserByUsername,
 };

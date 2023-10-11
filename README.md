@@ -2,7 +2,7 @@
 Author: Wenxin Qi Xiaolin Liu 
 
 Project Objectives: 
-This web application aims to connect animals and animal lovers so your fur friends can filfull specific needs. Users can register as humans to provide animal-related services, or set up a profile as your furry animals for social purposes. Users should be able to send image attachments in the chats. In-app applications created using Node js, Express, and MongoDB. 
+This web application aims to connect animals and animal lovers so your fur friends can filfull specific needs. Users can register as humans to provide animal-related services, or set up a profile as your furry animals for social purposes. Users should be able to send image attachments in the chats. In-app applications created using Node js, Express, and MongoDB.
 
 To successfully run this application as developer, you will need to install Node js, Express and MongoDB for full access.
 
@@ -32,7 +32,7 @@ To Install Locally
     install `` npm install eslint --save-dev ``
     set up config: ``npx eslint --init``
 
-6. set your mongoDB by modify url variable in // insert 
+6. set your mongoDB by modify url variable in ``mongodb+srv://qiwenxin98:Zjjxwjp@cluster0.chnfjby.mongodb.net/?retryWrites=true&w=majority``
 your project will be runing on localhost:3000
 
 Screenshots
