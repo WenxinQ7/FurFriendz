@@ -30,7 +30,7 @@ header {
 }
 
 .logo {
-  font-size: 2em;
+  font-size: 4em;
   color: #fff;
   user-select: none;
 }
@@ -42,6 +42,19 @@ header {
   text-decoration: none;
   font-weight: 500;
   margin-left: 40px;
+}
+
+#userpro {
+  /* display: table; */
+  padding: 5px;
+  position: relative;
+  font-size: 1.2em;
+  color: #162838;
+  background-color: beige;
+  text-decoration: none;
+  font-weight: 500;
+  margin-left: 40px;
+  border-radius: 30%;
 }
 
 .navigation .btnLogin-popup {
@@ -57,9 +70,37 @@ header {
   transition: 0.5s;
 }
 
+.btn-post {
+  width: 130px;
+  height: 50px;
+  outline: none;
+  background-color: #c97fc7;
+  cursor: pointer;
+  font-size: 1.1em;
+  color: #fff;
+  font-weight: 500;
+  margin-left: 40px;
+  transition: 0.5s;
+}
+
 .navigation .btnLogin-popup:hover {
   background: beige;
   color: #162938;
+}
+
+.app_title {
+  font-size: 4.5rem;
+}
+.app_desc {
+  font-size: 2rem;
+}
+.app-text {
+  text-align: center;
+  position: relative;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
 }
 
 .wrapper {
@@ -104,6 +145,22 @@ header {
 }
 
 .form-box h2 {
+  font-size: 2em;
+  color: #162938;
+  text-align: center;
+}
+
+.container {
+  width: 600px;
+  height: 440px;
+}
+
+.container .form-label {
+  font-size: 1.2em;
+  color: beige;
+}
+
+.container h2 {
   font-size: 2em;
   color: #162938;
   text-align: center;
