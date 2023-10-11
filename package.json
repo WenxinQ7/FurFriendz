@@ -1,7 +1,7 @@
 {
   "name": "furfriendz",
   "version": "1.0.0",
-  "description": "",
+  "description": "Author: Wenxin Qi Xiaolin Liu",
   "main": "index.js",
   "type": "module",
   "scripts": {
@@ -11,7 +11,7 @@
   "author": "",
   "license": "MIT",
   "devDependencies": {
-    "eslint": "^8.50.0",
+    "eslint": "^8.51.0",
     "eslint-config-prettier": "^9.0.0",
     "nodemon": "^3.0.1",
     "prettier": "^3.0.3"
