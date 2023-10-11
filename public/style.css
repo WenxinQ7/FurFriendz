@@ -9,6 +9,8 @@
 
 body {
   display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
   justify-content: center;
   align-items: center;
   min-height: 100vh;
@@ -228,4 +230,27 @@ header {
   color: #162938;
   text-decoration: none;
   font-weight: 600;
+}
+.post-container {
+  width: 300px;
+  padding: 20px;
+  background-color: #f0f0f0;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+  margin: 20px auto;
+}
+
+/* Post title styles */
+.post-title {
+  text-align: center;
+  font-size: 30px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+/* Post content styles */
+.post-content {
+  font-size: 20px;
+  line-height: 1.4;
 }
