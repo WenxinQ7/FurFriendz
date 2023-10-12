@@ -26,7 +26,7 @@ MongoClient.connect(MONGO_URI, (err, client) => {
 
 // Serve the custom /chat route
 app.get("/chat", (req, res) => {
-  res.sendFile(join(currentDir, "chat.html"));
+  res.sendFile(join(currentDir, "/public/chat.html"));
 });
 
 app.get("/user/:userId", async (req, res) => {
