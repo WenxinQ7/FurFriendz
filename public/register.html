@@ -15,8 +15,8 @@
         <a href="#">Home</a>
         <a href="#">About</a>
         <a href="#">Services</a>
-        <a href="/chat.html">Chat</a>
-        <button class="btnLogin-popup" href="./login.html">Login</button>
+        <a href="/public/chat.html">Chat</a>
+        <button class="btnLogin-popup" href="/public/login.html">Login</button>
       </nav>
     </header>
 
@@ -46,7 +46,7 @@
               <a
                 href="#"
                 class="login-link"
-                onclick="window.location.href = 'login.html';"
+                onclick="window.location.href = '/public/login.html';"
                 >Login</a
               >
             </p>
@@ -77,7 +77,7 @@
 
         if (result.status === "ok") {
           alert("Success");
-          window.location.href = "login.html";
+          window.location.href = "public/login.html";
         } else {
           alert(result.error);
         }
