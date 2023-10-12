@@ -1,4 +1,4 @@
-const { MongoClient } = require("mongodb");
+import { MongoClient } from "mongodb";
 const url =
   "mongodb+srv://qiwenxin98:Zjjxwjp@cluster0.chnfjby.mongodb.net/?retryWrites=true&w=majority";
 const client = new MongoClient(url);
@@ -38,7 +38,7 @@ async function deletePostByName(title) {
   return await db.collection("posts").deleteOne(title);
 }
 
-module.exports = {
+export default {
   insertPost,
   findUserByPetName,
   editPostByName,
