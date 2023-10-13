@@ -10,7 +10,7 @@ Delpoyed Link https://wenxinq7.github.io/FurFriendz/
 
 Slides Here https://docs.google.com/presentation/d/e/2PACX-1vQieGdEytA2ZnmdE4iP7Aq6P2Ivk6ldxxDyig8t_3a5VOcW1rDbkuKRT8JVC_z7SB8sJxPIGlyAeuNg/pub?start=false&loop=false&delayms=3000
 
-Video Here // insert video
+Video Here ``https://www.youtube.com/watch?v=JCG1f-k5C_k``
 
 Tech Requirements
 HTML5
