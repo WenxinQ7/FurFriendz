@@ -1,5 +1,5 @@
 const express = require("express");
-const userCollection = require("./mongo");
+const userCollection = require("./module/userCollection");
 const bodyParser = require("body-parser");
 const port = process.env.PORT || 3000;
 const path = require("path");
@@ -15,7 +15,7 @@ app.use(express.json());
 app.use(express.static("public"));
 app.use(bodyParser.json());
 
-app.get("/", (req, res) => {
+app.get("/index", (req, res) => {
   res.sendFile(__dirname + "/public/index.html");
 });
 
@@ -44,10 +44,20 @@ app.post("/register", async (req, res) => {
     });
   }
 
+  const checking = await userCollection.findUserByUsername({
+    username: req.body.username,
+  });
+
+  if (checking) {
+    if (checking.username === req.body.username) {
+      return res.json({ status: "error", error: "Username already in use" });
+    }
+  }
+
   const password = await bcrypt.hash(plainTextPassword, 10);
 
   try {
-    const response = await userCollection.create({
+    const response = await userCollection.createUser({
       username,
       password,
     });
@@ -63,9 +73,9 @@ app.post("/register", async (req, res) => {
   res.json({ status: "ok" });
 });
 
-app.post("/api/login", async (req, res) => {
+app.post("/login", async (req, res) => {
   const { username, password } = req.body;
-  const user = await userCollection.findOne({ username }).lean();
+  const user = await userCollection.findUserByUsername(username);
 
   if (!user) {
     return res.json({ status: "error", error: "Invalid username/password" });
