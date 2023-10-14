@@ -6,7 +6,7 @@ This web application aims to connect animals and animal lovers so your fur frien
 
 To successfully run this application as developer, you will need to install Node js, Express and MongoDB for full access.
 
-Delpoyed Link https://wenxinq7.github.io/FurFriendz/
+Delpoyed Link https://furfriendz.onrender.com
 
 Slides Here https://docs.google.com/presentation/d/e/2PACX-1vQieGdEytA2ZnmdE4iP7Aq6P2Ivk6ldxxDyig8t_3a5VOcW1rDbkuKRT8JVC_z7SB8sJxPIGlyAeuNg/pub?start=false&loop=false&delayms=3000
 
