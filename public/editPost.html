@@ -41,7 +41,7 @@
           <input type="text" class="form-control" id="newPet" required />
         </div>
         <div class="mb-3">
-          <label for="content" class="form-label">Profile</label>
+          <label for="content" class="form-label">New Profile</label>
           <textarea
             class="form-control"
             id="newProfile"
@@ -50,7 +50,7 @@
           ></textarea>
         </div>
         <button type="submit" class="btn btn-primary" id="createPostBtn">
-          Submit
+          Update
         </button>
       </form>
     </div>
@@ -66,13 +66,13 @@
 
     <script>
       const form = document.getElementById("postForm");
-      form.addEventListener("submit", addPost);
+      form.addEventListener("submit", editPost);
 
-      async function addPost(event) {
+      async function editPost(event) {
         event.preventDefault();
         const title = document.getElementById("newPet").value;
         const content = document.getElementById("newProfile").value;
-        const result = await fetch("/addPost", {
+        const result = await fetch("/editPost", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -84,13 +84,11 @@
         }).then((res) => res.json());
 
         if (result.status === "ok") {
-          sessionStorage.setItem("TITLE", title);
           sessionStorage.setItem("CONTENT", content);
-          alert("Post created successfully!");
-
+          alert("Post updated successfully!");
           window.location.href = "post.html";
         } else {
-          alert("This Pet friend already has a post");
+          alert("Failed to update post!");
         }
       }
     </script>

@@ -1,5 +1,6 @@
 const express = require("express");
 const userCollection = require("./module/userCollection");
+const Post = require("./module/post");
 const bodyParser = require("body-parser");
 const port = process.env.PORT || 3000;
 const path = require("path");
@@ -24,6 +25,10 @@ app.get("/register", (req, res) => {
 });
 app.get("/login", (req, res) => {
   res.sendFile(__dirname + "/public/login.html");
+});
+
+app.get("/addPost", (req, res) => {
+  res.sendFile(__dirname + "/public/addPost.html");
 });
 
 app.post("/register", async (req, res) => {
@@ -75,7 +80,7 @@ app.post("/register", async (req, res) => {
 
 app.post("/login", async (req, res) => {
   const { username, password } = req.body;
-  const user = await userCollection.findUserByUsername(username);
+  const user = await userCollection.findUserByUsername({ username });
 
   if (!user) {
     return res.json({ status: "error", error: "Invalid username/password" });
@@ -96,6 +101,68 @@ app.post("/login", async (req, res) => {
   }
 
   res.json({ status: "error", error: "Invalid username/password" });
+});
+
+app.post("/addPost", async (req, res) => {
+  const { title, content } = req.body;
+  if (!title || typeof title !== "string") {
+    return res.json({ status: "error", error: "Invalid pet name" });
+  }
+  if (!content || typeof content !== "string") {
+    return res.json({ status: "error", error: "Invalid content" });
+  }
+
+  const checking = await Post.findUserByPetName({
+    title: req.body.title,
+  });
+
+  if (checking) {
+    if (checking.title === req.body.title) {
+      return res.json({
+        status: "error",
+        error: "This Pet friend already has a post",
+      });
+    }
+  }
+
+  try {
+    const response = await Post.insertPost(req.body);
+    console.log("Post created successfully: ", response);
+  } catch (error) {
+    throw error;
+  }
+  res.json({ status: "ok" });
+});
+
+app.post("/editPost", async (req, res) => {
+  const { title, content } = req.body;
+  if (!title || typeof title !== "string") {
+    return res.json({ status: "error", error: "Invalid pet name" });
+  }
+  if (!content || typeof content !== "string") {
+    return res.json({ status: "error", error: "Invalid content" });
+  }
+
+  const checking = await Post.findUserByPetName({
+    title: req.body.title,
+  });
+
+  if (!checking) {
+    return res.json({
+      status: "error",
+      error: "This Pet name doesn't exist",
+    });
+  }
+
+  try {
+    const response = await Post.editPostByName(req.body.title, {
+      content: req.body.content,
+    });
+    console.log("Post updated successfully: ", response);
+  } catch (error) {
+    throw error;
+  }
+  res.json({ status: "ok" });
 });
 
 app.listen(3000, () => {

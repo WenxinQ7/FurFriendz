@@ -1,102 +1,46 @@
 const { MongoClient } = require("mongodb");
-const marked = require("marked");
-const slugify = require("slugify");
-const createDomPurify = require("dompurify");
-const { JSDOM } = require("jsdom");
-const dompurify = createDomPurify(new JSDOM().window);
-
-// Define your MongoDB connection URI
 const url =
   "mongodb+srv://qiwenxin98:Zjjxwjp@cluster0.chnfjby.mongodb.net/?retryWrites=true&w=majority";
 const client = new MongoClient(url);
 
-// Define your collection name
-const collectionName = "posts";
-
-// Function to connect to the MongoDB database
 async function connect() {
   try {
     await client.connect();
-    console.log("Connected to the MongoDB database");
+    return client.db("FurFriendz");
   } catch (error) {
-    console.error("Error connecting to the MongoDB database:", error);
+    throw new Error("Failed to connect to the database: " + error.message);
   }
 }
 
-// Function to insert a post into the database
-async function insertPost(post) {
-  try {
-    const database = client.db();
-    const collection = database.collection(collectionName);
-
-    // Create a slug and sanitized HTML
-    post.slug = slugify(post.title, { lower: true, strict: true });
-    post.sanitizedHtml = dompurify.sanitize(marked(post.markdown));
-
-    // Insert the post into the collection
-    const result = await collection.insertOne(post);
-    return result.ops[0];
-  } catch (error) {
-    console.error("Error inserting article:", error);
-    return null;
-  }
+async function findUserByPetName(title) {
+  const db = await connect();
+  return db.collection("posts").findOne(title);
 }
 
-async function findById(id) {
-  try {
-    const database = client.db();
-    const collection = database.collection(collectionName);
-
-    const post = await collection.findOne({ _id: ObjectId(id) });
-
-    return post;
-  } catch (error) {
-    console.error("Error finding article by ID:", error);
-    return null;
-  }
+async function insertPost(entry) {
+  const db = await connect();
+  const newPostEntry = {
+    title: entry.title,
+    content: entry.content,
+  };
+  return db.collection("posts").insertOne(newPostEntry);
 }
 
-async function findPostBySlug(slug) {
-  try {
-    const database = client.db();
-    const collection = database.collection(collectionName);
-
-    // Use the findOne method to find the article by its slug
-    const post = await collection.findOne({ slug });
-    return post;
-  } catch (error) {
-    console.error("Error finding article by slug:", error);
-    return null;
-  }
+async function editPostByName(title, update) {
+  const db = await connect();
+  return (result = await db
+    .collection("posts")
+    .updateOne({ title }, { $set: update }));
 }
 
-async function deletePostById(id) {
-  try {
-    const database = client.db();
-    const collection = database.collection(collectionName);
-
-    const objectId = new ObjectID(id);
-
-    // Use findByIdAndDelete to remove the article by its ID
-    const result = await collection.findOneAndDelete({ _id: objectId });
-
-    if (result.value) {
-      console.log("Deleted post:", result.value);
-      return result.value;
-    } else {
-      console.log("post not found");
-      return null;
-    }
-  } catch (error) {
-    console.error("Error deleting post:", error);
-    return null;
-  }
+async function deletePostByName(title) {
+  const db = await connect();
+  return await db.collection("posts").deleteOne(title);
 }
-// Export functions to connect and insert posts
+
 module.exports = {
-  connect,
   insertPost,
-  findById,
-  findPostBySlug,
-  deletePostById,
+  findUserByPetName,
+  editPostByName,
+  deletePostByName,
 };
