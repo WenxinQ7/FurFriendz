@@ -1,11 +1,8 @@
-import { MongoClient } from "mongodb";
-const url =
-  "mongodb+srv://qiwenxin98:Zjjxwjp@cluster0.chnfjby.mongodb.net/?retryWrites=true&w=majority";
-const client = new MongoClient(url);
+
+const db = require("./db").client;
 
 async function connect() {
   try {
-    await client.connect();
     return client.db("FurFriendz");
   } catch (error) {
     throw new Error("Failed to connect to the database: " + error.message);
@@ -13,12 +10,10 @@ async function connect() {
 }
 
 async function findUserByPetName(title) {
-  const db = await connect();
   return db.collection("posts").findOne(title);
 }
 
 async function insertPost(entry) {
-  const db = await connect();
   const newPostEntry = {
     title: entry.title,
     content: entry.content,
@@ -27,18 +22,16 @@ async function insertPost(entry) {
 }
 
 async function editPostByName(title, update) {
-  const db = await connect();
   return (result = await db
     .collection("posts")
     .updateOne({ title }, { $set: update }));
 }
 
 async function deletePostByName(title) {
-  const db = await connect();
   return await db.collection("posts").deleteOne(title);
 }
 
-export default {
+module.exports =  {
   insertPost,
   findUserByPetName,
   editPostByName,
