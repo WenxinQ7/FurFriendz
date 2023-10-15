@@ -6,19 +6,25 @@ const port = process.env.PORT || 3000;
 const path = require("path");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
-
+const chatFunc = require("./router/chat").chatFunc;
 const JWT_SECRET =
   "sdjkfh8923yhjdksbfma@#*(&@*!^#&@bhjb2qiuhesdbhjdsfg839ujkdhfjk";
 
+const connectDB = require("./module/db").connectDB;
+
+connectDB(); //todo: we need to await the database connection before we can start the server
+const db = require("./module/db").client;
 const app = express();
 
 app.use(express.json());
-app.use(express.static("public"));
 app.use(bodyParser.json());
-
-app.get("/index", (req, res) => {
+app.use("/public", express.static(path.join(__dirname, "public")));
+chatFunc(app, db);
+app.get("/", (req, res) => {
   res.sendFile(__dirname + "/index.html");
 });
+
+app.get("/")
 
 app.get("/register", (req, res) => {
   res.sendFile(__dirname + "/public/register.html");
