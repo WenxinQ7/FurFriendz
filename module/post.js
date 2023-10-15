@@ -1,4 +1,3 @@
-
 const db = require("./db").client;
 
 async function connect() {
@@ -10,7 +9,7 @@ async function connect() {
 }
 
 async function findUserByPetName(title) {
-  return db.collection("posts").findOne(title);
+  return db.db("FurFriendz").collection("posts").findOne(title);
 }
 
 async function insertPost(entry) {
@@ -18,20 +17,21 @@ async function insertPost(entry) {
     title: entry.title,
     content: entry.content,
   };
-  return db.collection("posts").insertOne(newPostEntry);
+  return db.db("FurFriendz").collection("posts").insertOne(newPostEntry);
 }
 
 async function editPostByName(title, update) {
   return (result = await db
+    .db("FurFriendz")
     .collection("posts")
     .updateOne({ title }, { $set: update }));
 }
 
 async function deletePostByName(title) {
-  return await db.collection("posts").deleteOne(title);
+  return await db.db("FurFriendz").collection("posts").deleteOne(title);
 }
 
-module.exports =  {
+module.exports = {
   insertPost,
   findUserByPetName,
   editPostByName,

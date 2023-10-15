@@ -21,10 +21,12 @@ app.use(bodyParser.json());
 app.use("/public", express.static(path.join(__dirname, "public")));
 chatFunc(app, db);
 app.get("/", (req, res) => {
-  res.sendFile(__dirname + "/index.html");
+  res.sendFile(__dirname + "/public/index.html");
 });
 
-app.get("/")
+app.get("/index", (req, res) => {
+  res.sendFile(__dirname + "/public/index.html");
+});
 
 app.get("/register", (req, res) => {
   res.sendFile(__dirname + "/public/register.html");
