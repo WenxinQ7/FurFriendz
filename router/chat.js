@@ -1,8 +1,9 @@
+const join = require("path").join;
 const chatFunc = (app, db)=>{
 
     // Serve the custom /chat route
     app.get("/chat", (req, res) => {
-      res.sendFile(join(__dirname, "/public/chat.html"));
+      res.sendFile(join(__dirname, "../public/chat.html"));
     });
     
     app.get("/user/:userId", async (req, res) => {
