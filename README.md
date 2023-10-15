@@ -49,5 +49,3 @@ chat messages
 
 post
 ![screenshot-post](screenshots/post.png)
-
-
