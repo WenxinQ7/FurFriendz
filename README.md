@@ -2,6 +2,13 @@
 
 Author: Wenxin Qi Xiaolin Liu
 
+**Code Review**
+Great work! There are something that I think you can prove:
+1. Some of the navbar links doesn't work
+2. Write javascript code in separate file instead in the html file
+3. Use import instead of require
+4. Registeration is not functional
+
 Project Objectives:
 This web application aims to connect animals and animal lovers so your fur friends can filfull specific needs. Users can register as humans to provide animal-related services, or set up a profile as your furry animals for social purposes. Users should be able to send image attachments in the chats. In-app applications created using Node js, Express, and MongoDB.
 
