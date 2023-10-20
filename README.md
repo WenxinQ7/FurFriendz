@@ -49,3 +49,6 @@ chat messages
 
 post
 ![screenshot-post](screenshots/post.png)
+
+Hint for grading about the redirecting bug in registration page:
+changed from window.location.href = "public/login.html" to window.location.href = "/public/login.html";
